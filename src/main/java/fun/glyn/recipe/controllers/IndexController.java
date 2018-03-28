@@ -1,33 +1,24 @@
 package fun.glyn.recipe.controllers;
 
-import fun.glyn.recipe.domain.Category;
-import fun.glyn.recipe.domain.UnitOfMeasure;
-import fun.glyn.recipe.repositories.CategoryRepository;
-import fun.glyn.recipe.repositories.UnitOfMeasureRepository;
+import fun.glyn.recipe.services.RecipeService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.Optional;
 
 @Controller
 public class IndexController {
 
-    private CategoryRepository categoryRepository;
-    private UnitOfMeasureRepository unitOfMeasureRepository;
+    private RecipeService recipeService;
 
-    public IndexController(CategoryRepository categoryRepository, UnitOfMeasureRepository unitOfMeasureRepository) {
-        this.categoryRepository = categoryRepository;
-        this.unitOfMeasureRepository = unitOfMeasureRepository;
+    public IndexController(RecipeService recipeService) {
+        this.recipeService = recipeService;
     }
 
     @RequestMapping({"/", "", "/index"})
-    public String getIndexPage() {
+    public String getIndexPage(Model model) {
 
-        Optional<Category> categoryOptional = categoryRepository.findByDescription("American");
-        Optional<UnitOfMeasure> unitOfMeasureOptional = unitOfMeasureRepository.findByDescription("Teaspoon");
+        model.addAttribute("recipes", recipeService.getRecipes());
 
-        System.out.println("Cat ID : " + categoryOptional.get().getId());
-        System.out.println("Unit ID : " + unitOfMeasureOptional.get().getId());
         return "index";
     }
 }
