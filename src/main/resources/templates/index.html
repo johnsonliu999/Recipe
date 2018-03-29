@@ -8,6 +8,8 @@
     <script src="/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"></script>
 </head>
 <body>
+<!-- /*@thymesVar id="recipes" type="java.util.List" */ -->
+<!-- /*@thymesVar id="recipe" type="fun.glyn.recipe.domain.Recipe"*/ -->
 <div class="container-fluid" style="margin-top: 20px">
     <div class="row">
         <div class="col-md-6 offset-md-3">
@@ -26,16 +28,19 @@
                                     <th>Cook Time</th>
                                     <th>Prepare Time</th>
                                     <th>Servings</th>
-                                    <th>URL</th>
+                                    <th>View</th>
+                                    <th>Update</th>
                                 </tr>
                             </thead>
                             <tr th:each="recipe : ${recipes}">
-                                <td th:text="${recipe.id}"></td>
-                                <td th:text="${recipe.description}"></td>
-                                <td th:text="${recipe.cookTime}"></td>
-                                <td th:text="${recipe.prepTime}"></td>
-                                <td th:text="${recipe.servings}"></td>
-                                <td><a href="#" th:href="@{'/receipe/show/' + ${recipe.id}}">View</a></td>
+                                <td th:text="${recipe.getId()}"></td>
+                                <td th:text="${recipe.getDescription()}"></td>
+                                <td th:text="${recipe.getCookTime()}"></td>
+                                <td th:text="${recipe.getPrepTime()}"></td>
+                                <td th:text="${recipe.getServings()}"></td>
+                                <td><a href="#" th:href="@{'/recipe/' + ${recipe.getId() + '/show'}}">View</a></td>
+                                <td><a href="#" th:href="@{'/recipe/' + ${recipe.getId() + '/update'}}">Update</a></td>
+                                <td><a href="#" th:href="@{'/recipe/' + ${recipe.getId() + '/delete'}}">Delete</a></td>
                             </tr>
                         </table>
                     </div>

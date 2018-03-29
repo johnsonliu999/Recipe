@@ -99,6 +99,7 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
                 "\n" +
                 "For a deviled egg version with guacamole, try our Guacamole Deviled Eggs!");
 
+        guacRecipe.setSource("Simple Recipe");
         guacRecipe.setNotes(guacNotes);
 
         guacRecipe.addIngredient(new Ingredient("ripe avocados", new BigDecimal(2), eachUom));
@@ -172,6 +173,7 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         tacosRecipe.getCategories().add(americanCategory);
         tacosRecipe.getCategories().add(mexicanCategory);
 
+        tacosRecipe.setSource("Simple Recipe");
 
         recipes.add(tacosRecipe);
 
