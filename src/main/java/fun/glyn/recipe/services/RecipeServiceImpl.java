@@ -4,8 +4,10 @@ import fun.glyn.recipe.commands.RecipeCommand;
 import fun.glyn.recipe.converters.RecipeCommandToRecipe;
 import fun.glyn.recipe.converters.RecipeToRecipeCommand;
 import fun.glyn.recipe.domain.Recipe;
+import fun.glyn.recipe.exceptions.NotFoundException;
 import fun.glyn.recipe.repositories.RecipeRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.omg.CosNaming.NamingContextPackage.NotFound;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,7 +44,7 @@ public class RecipeServiceImpl implements RecipeService {
     public Recipe findById(Long l) {
         Optional<Recipe> recipeOptional = recipeRepository.findById(l);
 
-        if (!recipeOptional.isPresent()) throw new RuntimeException("Recipe not found");
+        if (!recipeOptional.isPresent()) throw new NotFoundException("Recipe not found");
         return recipeOptional.get();
     }
 
